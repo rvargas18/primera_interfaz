@@ -1,16 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Actualizar Valores en Redis</title>
+    <title>Gestión de Configuraciones</title>
 </head>
 <body>
-    <h1>Actualizar Valores en Redis</h1>
-    <form action="/update" method="post">
-        <label for="key">Clave:</label>
-        <input type="text" id="key" name="key"><br><br>
-        <label for="value">Valor:</label>
-        <input type="text" id="value" name="value"><br><br>
-        <input type="submit" value="Actualizar">
+    <h1>Configuraciones:</h1>
+
+    <h1>1. Servidor</h1>
+
+    <h2>Ingrese IP del Servidor</h2>
+
+    <form action="/update_server" method="post">
+        <label for="server">IP:</label><br>
+        <input type="text" id="server" name="server" placeholder="Ejemplo: 10.8.1.1"><br><br>
+        <input type="submit" value="Actualizar Servidor">
+    </form>
+    <h3>Servidor Actual: {{ server }}</h3>
+
+    <h1>2. Gestión de Pines en Redis</h1>
+
+    <h2>2.1 Actualizar Listado de Pines</h2>
+    <p>Valores disponibles: <strong>5, 6, 13, 16, 19, 20, 21, 26</strong></p>
+    <p>Puedes ingresar entre <strong>1 y 8 valores</strong>, separados por comas.</p>
+    <form action="/update_pines" method="post">
+        <label for="value">Valores (separados por comas):</label><br>
+        <input type="text" id="value" name="value" placeholder="Ejemplo: 5,13"><br><br>
+        <input type="submit" value="Actualizar Pines">
+    </form>
+    <h3>Pines seleccionados actualmente:</h3>
+    <ul>
+        {% for pin in selected_pins %}
+            <li>Pin: {{ pin }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>2.2 Gestionar Detalles de Pines</h2>
+    <p>Selecciona un pin para ingresar o modificar sus detalles específicos.</p>
+    <form action="/update_details" method="get">
+        <input type="submit" value="Ir a Gestión de Detalles de Pines">
+    </form>
+
+    <h1>Salir</h1>
+    <form action="/logout" method="get">
+        <input type="submit" value="Salir">
     </form>
 </body>
 </html>
