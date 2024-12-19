@@ -85,7 +85,7 @@ def update_pines():
     
     # Actualizar la lista en Redis
     r.delete(key)  # Borra la lista anterior
-    r.set(key, "{}".format(values))  # Agrega los nuevos valores
+    r.set(key, f"{values}")  # Agrega los nuevos valores
 
     # Guardar los valores en Redis
     r.delete(key2)  # Eliminar la lista anterior
@@ -99,7 +99,7 @@ def update_pines():
 def update_server():
     key = 'server'
     server = request.form['server']
-    r.set(key, "{}".format(server))
+    r.set(key, f"{server}")
 
     return redirect(url_for('index'))
 
