@@ -17,13 +17,13 @@
         <input type="text" id="device" name="device" placeholder="ID del dispositivo" required value="{{ device }}"><br><br>
 
         <label for="habilitacion_zsf">Habilitación ZSF:</label>
-        <input type="checkbox" id="habilitacion_zsf" name="habilitacion_zsf" value="1" {% if habilitacion_zsf %}checked{% endif %}><br><br>
+        <input type="checkbox" id="habilitacion_zsf" name="habilitacion_zsf" value="1" {% if habilitacion_zsf == "1" %}checked{% endif %}><br><br>
 
         <label for="tiempo_zsf">Tiempo ZSF (segundos):</label>
         <input type="number" id="tiempo_zsf" name="tiempo_zsf" min="0" required value="{{ tiempo_zsf }}"><br><br>
 
         <label for="habilitacion_osf">Habilitación OSF:</label>
-        <input type="checkbox" id="habilitacion_osf" name="habilitacion_osf" value="1" {% if habilitacion_osf %}checked{% endif %}><br><br>
+        <input type="checkbox" id="habilitacion_osf" name="habilitacion_osf" value="1" {% if habilitacion_osf == "1" %}checked{% endif %}><br><br>
 
         <label for="tiempo_osf">Tiempo OSF (segundos):</label>
         <input type="number" id="tiempo_osf" name="tiempo_osf" min="0" required value="{{ tiempo_osf }}"><br><br>
@@ -36,7 +36,7 @@
         <h2>Datos Guardados para el Pin {{ selected_pin }}:</h2>
         <ul>
             <li><strong>Device:</strong> {{ device }}</li>
-            <li><strong>Habilitación ZSF:</strong> {{ 'Sí' if habilitacion_zsf else 'No' }}</li>
+            <li><strong>Habilitación ZSF:</strong> {{ 'Sí' if habilitacion_zsf == '1' else 'No' }}</li>
             <li><strong>Tiempo ZSF:</strong> {{ tiempo_zsf }} segundos</li>
             <li><strong>Habilitación OSF:</strong> {{ 'Sí' if habilitacion_osf == '1' else 'No' }}</li>
             <li><strong>Tiempo OSF:</strong> {{ tiempo_osf }} segundos</li>

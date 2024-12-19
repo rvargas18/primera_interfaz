@@ -60,7 +60,6 @@ def index():
     selected_pins = r.lrange(key, 0, -1)  # Obtener lista de pines seleccionados
     selected_pins = [int(pin) for pin in selected_pins]  # Convertir a enteros
     server = r.get('server')
-    # server = _server.decode('utf-8') if _server else 'localhost'
 
     return render_template('index.html', selected_pins=selected_pins, server=server)
 
@@ -83,13 +82,16 @@ def update_pines():
     if not (1 <= len(value_list) <= 8):
         return "Debes ingresar entre 1 y 8 valores.", 400
     
-    # Actualizar la lista en Redis
-    r.delete(key)  # Borra la lista anterior
-    r.set(key, f"{values}")  # Agrega los nuevos valores
-
     # Guardar los valores en Redis
+    r.set(key, f"{values}")
+
+    # Actualiza la lista en Redis
     r.delete(key2)  # Eliminar la lista anterior
     r.rpush(key2, *value_list)  # Guardar los nuevos valores
+
+    # Borra datos anteriores de las máquinas
+    for pin in value_list:
+        r.delete(f'devid_{pin}')
 
     return redirect(url_for('index'))
 
